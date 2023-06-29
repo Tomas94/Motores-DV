@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spikes : Obstacles
 {
+    [SerializeField] bool isStatic;
     [SerializeField] bool isHidden;
 
     //Posiciones
@@ -15,23 +16,24 @@ public class Spikes : Obstacles
     float waitTime = 1;
 
     //direccion del hide para x: -1 Izquierda 1 Derecha para y: 1 Abajo -1 arriba
-
+    [SerializeField] int xHide;
+    [SerializeField] int yHide;
 
     void Start()
     {
         startPos = transform.position;
-        hidePos = startPos - new Vector3(0, 1);
+        hidePos = startPos - new Vector3(xHide, yHide);
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P)) StartCoroutine(Mov());
-        StartCoroutine(Mov());
+        Activate();
     }
 
     public override void Activate()
     {
-
+        if (isStatic) return;
+        StartCoroutine(Mov());
     }
 
     /*  void MovingSpikes(string direction)
