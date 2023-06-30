@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour, IMovable
 {
+
+    public Vector3 rbVelocity;
+
     //Referencias
     Rigidbody2D _rb;
 
@@ -29,22 +32,27 @@ public class PlayerMovement : MonoBehaviour, IMovable
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+
+    }
+    private void Update()
+    {
+        rbVelocity = _rb.velocity;
     }
 
-    public Vector2 MoveVector()
+    public void StartMovement(float direction)
     {
-        xMov = Input.GetAxisRaw("Horizontal");
-        Vector2 movimiento = new Vector2(xMov * _speed * Time.deltaTime, 0);
-        return movimiento;
-    }
+        float xVelocity = direction * _speed;
 
-    public void StartMovement()
-    {
-        float xVelocity = _rb.velocity.x;
+        if (xVelocity <= -_speed)
+        {
+            xVelocity = -_speed;
+        }
+        else if (xVelocity >= _speed)
+        {
+            xVelocity = _speed;
+        }
 
-        if (xVelocity <= _maxAllowedSpeed * -1) xVelocity = _maxAllowedSpeed * -1;
-        else if (xVelocity >= _maxAllowedSpeed) xVelocity = _maxAllowedSpeed;
-        else _rb.velocity += MoveVector();
+        _rb.velocity = new Vector2(xVelocity, _rb.velocity.y);
     }
 
     public void StopMovement()

@@ -7,6 +7,7 @@ public class PlayerController : Entity
 
     PlayerMovement playerMovement;
     PlayerCollisions playerCollisions;
+    public float xDirection;
 
     private void Awake()
     {
@@ -24,18 +25,21 @@ public class PlayerController : Entity
 
     void Start()
     {
-        
         playerMovement?.SetSpeed(speed);
+        MaxLifes = 3;
+        currentLifes = MaxLifes;
     }
 
     private void Update()
     {
         MovementController();
+        
     }
 
     void MovementController()
     {
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) && playerMovement != null) playerMovement.StartMovement();
+        xDirection = Input.GetAxisRaw("Horizontal");
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) && playerMovement != null) playerMovement.StartMovement(xDirection);
         else playerMovement?.StopMovement();
 
         if (Input.GetKey(KeyCode.Space) && playerCollisions.isGrounded)

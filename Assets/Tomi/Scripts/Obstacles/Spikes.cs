@@ -13,14 +13,15 @@ public class Spikes : Obstacles
 
     //Tiempo transicion y de espera entre estados
     float movTime = 0.5f;
-    float waitTime = 1;
+    
 
-    //direccion del hide para x: -1 Izquierda 1 Derecha para y: 1 Abajo -1 arriba
+    //direccion del hide para x: 1 Izquierda -1 Derecha para y: 1 Abajo -1 arriba
     [SerializeField] int xHide;
     [SerializeField] int yHide;
 
     void Start()
     {
+        coolDown = 1;
         startPos = transform.position;
         hidePos = startPos - new Vector3(xHide, yHide);
     }
@@ -33,35 +34,10 @@ public class Spikes : Obstacles
     public override void Activate()
     {
         if (isStatic) return;
-        StartCoroutine(Mov());
+        StartCoroutine(StateChange());
     }
 
-    /*  void MovingSpikes(string direction)
-      {
-          float interpolation = Time.deltaTime;
-          //Vector3 movDir = new Vector3();
-
-          switch (direction)
-          {
-              case "up":
-                  movDir = new Vector3(0, 1);
-                  break;
-              case "down":
-                  movDir = new Vector3(0, -1);
-                  break;
-              case "left":
-                  movDir = new Vector3(-1, 0);
-                  break;
-              case "right":
-                  movDir = new Vector3(1, 0);
-                  break;
-          }
-
-          transform.position += movDir;
-
-      }*/
-
-    IEnumerator Mov()
+    public override IEnumerator StateChange()
     {
         float elapsedTime;
 
@@ -79,7 +55,7 @@ public class Spikes : Obstacles
 
             transform.position = hidePos;
             
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(coolDown);
 
             elapsedTime = 0f;
 
@@ -91,7 +67,7 @@ public class Spikes : Obstacles
             }
 
             transform.position = startPos;
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(coolDown);
             isHidden = false;
         }
 

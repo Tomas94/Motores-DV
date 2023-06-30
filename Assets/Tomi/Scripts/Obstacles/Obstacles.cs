@@ -6,5 +6,7 @@ public abstract class Obstacles : MonoBehaviour
 {
     [SerializeField] protected float coolDown;
 
-    public abstract void Activate();
+    public virtual void Activate() { }
+
+    public abstract IEnumerator StateChange();
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerCollisions : MonoBehaviour
 {
 
@@ -40,11 +41,18 @@ public class PlayerCollisions : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //Checkea si se ta tocando el piso
         IsGrounded(collision.gameObject, true);
+
+        if (collision.GetComponent<FragilePlatform>())
+        {
+            collision.GetComponent<FragilePlatform>().Shake();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        //Checkea si se ta dejando de tocar el piso
         IsGrounded(collision.gameObject, false);
     }
 

@@ -5,22 +5,23 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     //Variables Vida
-    private int _maxHP;
-    private bool isMaxHPSet = false;
+    public int currentLifes {get;set;}
+    private int _maxLifes;
+    private bool _isMaxLifesSet = false;
     [SerializeField] protected float speed;
 
     //Variables Daño
 
-    public int MaxHP
+    public int MaxLifes
     {
-        get { return _maxHP; }
+        get { return _maxLifes; }
         
         set
         {
-            if (!isMaxHPSet)
+            if (!_isMaxLifesSet)
             {
-                _maxHP = value;
-                isMaxHPSet = true;
+                _maxLifes = value;
+                _isMaxLifesSet = true;
             }
         }
     }

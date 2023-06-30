@@ -29,7 +29,7 @@ public class Laser : Obstacles
     public override void Activate()
     {
         LaserShoot();
-        if (!_coroutinePlaying)StartCoroutine(LaserSwitch());
+        if (!_coroutinePlaying) StartCoroutine(StateChange());
     }
 
     void LaserShoot()
@@ -51,15 +51,14 @@ public class Laser : Obstacles
         {
             laserLine.enabled = false;
         }
-
     }
 
-    IEnumerator LaserSwitch()
+    public override IEnumerator StateChange()
     {
+        if (coolDown <= 0) yield break;
         _coroutinePlaying = true;
         turnON = !turnON;
         yield return new WaitForSeconds(coolDown);
         _coroutinePlaying = false;
     }
-
 }
