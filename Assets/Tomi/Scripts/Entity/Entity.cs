@@ -6,7 +6,7 @@ public class Entity : MonoBehaviour
 {
     //Variables Vida
     public int currentLifes {get;set;}
-    private int _maxLifes;
+    [SerializeField] private int _maxLifes;
     private bool _isMaxLifesSet = false;
     [SerializeField] protected float speed;
 

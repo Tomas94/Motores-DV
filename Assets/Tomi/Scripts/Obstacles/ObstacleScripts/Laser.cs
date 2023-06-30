@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
 
-public class Laser : Obstacles
+public class Laser : Obstacles, IDamageable
 {
     [SerializeField] LineRenderer laserLine;
     [SerializeField] Vector2 _direction;
@@ -44,6 +44,10 @@ public class Laser : Obstacles
             {
                 laserLine.SetPosition(0, startPos);
                 laserLine.SetPosition(1, _hitInfo.point);
+                if (_hitInfo.transform.CompareTag("Player"))
+                {
+                    TakeDamage(_hitInfo.transform.gameObject);
+                }
             }
             else laserLine.enabled = false;
         }
@@ -60,5 +64,16 @@ public class Laser : Obstacles
         turnON = !turnON;
         yield return new WaitForSeconds(coolDown);
         _coroutinePlaying = false;
+    }
+
+    public void TakeDamage(GameObject player)
+    {
+        Debug.Log("se intenta aplicar daño");
+        PlayerController playerC = player.GetComponent<PlayerController>();
+
+        playerC.transform.position = playerC.lastCheckPoint;
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        playerC.currentLifes--;
+        if (playerC.currentLifes <= 0) playerC.Death();
     }
 }

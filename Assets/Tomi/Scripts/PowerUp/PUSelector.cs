@@ -8,7 +8,7 @@ public class PUSelector : MonoBehaviour
     {
         Dash,
         DoubleJump,
-        WallBounce
+        WallJump
     }
 
     [SerializeField] PowerUpList selectedPU;
@@ -19,8 +19,8 @@ public class PUSelector : MonoBehaviour
         {
             PlayerPowerUp player = collision.GetComponent<PlayerPowerUp>();
             player.CurrentPowerUp(selectedPU.ToString());
-            player.canUse = true;
-            Destroy(gameObject);
+            if(selectedPU != PowerUpList.WallJump) player.canUse = true;
+            Destroy(gameObject); 
         }
     }
 
