@@ -4,37 +4,68 @@ using UnityEngine;
 
 public class PlayerPowerUp : MonoBehaviour
 {
+    public PowerUp powerup;
+    public bool canUse;
+    public float activeTime;
 
-    bool canUsePowerUp;
-
-    public enum PowerUpList
+    public enum PowerUpState
     {
-        Dash,
-        DoubleJump,
-        WallBounce
+        Locked,
+        Ready,
+        Active
     }
 
-    public PowerUpList powerUpType;
-    
-    void Start()
-    {
-        
-    }
+    //  public PowerUpList powerUpType;
+    public PowerUpState state = PowerUpState.Locked;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canUsePowerUp)
+        PowerUpStateSwitch();
+    }
+
+    void PowerUpStateSwitch()
+    {
+        if (!powerup) return;
+        switch (state)
         {
-            if(powerUpType == PowerUpList.DoubleJump)
-            {
-
-            }
+            case PowerUpState.Ready:
+                if (Input.GetKeyDown(KeyCode.K))
+                {
+                    powerup.Activate(gameObject);
+                    state = PowerUpState.Active;
+                    activeTime = powerup.activeTime;
+                }
+                break;
+            case PowerUpState.Active:
+                canUse = false;
+                if (activeTime > 0)
+                {
+                    activeTime -= Time.deltaTime;
+                }
+                else
+                {
+                    state = PowerUpState.Locked;
+                }
+                break;
+            case PowerUpState.Locked:
+                powerup.FinishAction(gameObject);
+                powerup = null;
+                if (canUse) state = PowerUpState.Ready;
+                break;
         }
-    } 
+    }
 
-
-
-
+    public void CurrentPowerUp(string powerName)
+    {
+        if (powerName == "Dash")
+        {
+            powerup = GetComponent<Dash>();
+        }
+        if (powerName == "DoubleJump")
+        {
+            powerup = GetComponent<DoubleJump>();
+        }
+    }
 
 
 }

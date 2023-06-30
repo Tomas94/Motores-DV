@@ -7,7 +7,6 @@ public class PlayerController : Entity
 
     PlayerMovement playerMovement;
     PlayerCollisions playerCollisions;
-    public float xDirection;
 
     private void Awake()
     {
@@ -30,23 +29,23 @@ public class PlayerController : Entity
         currentLifes = MaxLifes;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         MovementController();
-        
     }
 
     void MovementController()
     {
-        xDirection = Input.GetAxisRaw("Horizontal");
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) && playerMovement != null) playerMovement.StartMovement(xDirection);
-        else playerMovement?.StopMovement();
-
-        if (Input.GetKey(KeyCode.Space) && playerCollisions.isGrounded)
+        if (playerMovement != null)
         {
-            playerCollisions.isGrounded = false;
-            playerMovement.Jump();
+            if (playerMovement.horizontalMove != Vector2.zero) playerMovement.StartMovement();
+            else playerMovement?.StopMovement();
+
+            if (Input.GetKey(KeyCode.Space) && playerCollisions.isGrounded)
+            {
+                playerCollisions.isGrounded = false;
+                playerMovement.Jump();
+            }
         }
     }
-
 }

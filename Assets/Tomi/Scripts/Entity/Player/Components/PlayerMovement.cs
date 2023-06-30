@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour, IMovable
 {
-
+    //variables para testeo
     public Vector3 rbVelocity;
+    public bool isgroundTest;
 
     //Referencias
     Rigidbody2D _rb;
@@ -17,12 +18,13 @@ public class PlayerMovement : MonoBehaviour, IMovable
 
     //Variables para GroundCheck
     public LayerMask groundLayer;
-    public bool isgroundTest;
+ 
 
     //Variables de Movimiento y Velocidad
-    float xMov;
+    public Vector2 horizontalMove;
     [SerializeField] float _maxAllowedSpeed;
     float _speed;
+    public bool isDashing;
 
     public void SetSpeed(float speed)
     {
@@ -32,31 +34,25 @@ public class PlayerMovement : MonoBehaviour, IMovable
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        isDashing = false;
 
     }
     private void Update()
     {
+        horizontalMove = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
         rbVelocity = _rb.velocity;
     }
 
-    public void StartMovement(float direction)
+    public void StartMovement()
     {
-        float xVelocity = direction * _speed;
-
-        if (xVelocity <= -_speed)
-        {
-            xVelocity = -_speed;
-        }
-        else if (xVelocity >= _speed)
-        {
-            xVelocity = _speed;
-        }
-
-        _rb.velocity = new Vector2(xVelocity, _rb.velocity.y);
+        Vector2 aceleration = horizontalMove * _speed * Time.fixedDeltaTime;
+        _rb.velocity += aceleration;
+        if(!isDashing)_rb.velocity = new Vector2(Mathf.Clamp(_rb.velocity.x, -_maxAllowedSpeed, _maxAllowedSpeed), _rb.velocity.y);
     }
 
     public void StopMovement()
     {
+        Debug.Log("Se detuvo");
         _rb.velocity = new Vector2(0, _rb.velocity.y);
     }
 

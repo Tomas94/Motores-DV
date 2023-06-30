@@ -5,6 +5,6 @@ using UnityEngine;
 public interface IMovable
 {
     void SetSpeed(float speed);       //Metodo para setear la velocidad
-    void StartMovement(float direction); //Encargado del movimiento
+    void StartMovement(); //Encargado del movimiento
     void StopMovement();
 }
