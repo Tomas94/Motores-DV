@@ -56,22 +56,4 @@ public class PlayerMovement : MonoBehaviour, IMovable
     {
         _rb.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
     }
-
-    /*private bool IsGrounded()
-    {
-        Vector2 position = groundCheckObj.position;
-        Vector2 direction = Vector2.down;
-        float distance = groundCheckerData.checkerDistance;
-
-        RaycastHit2D hit = Physics2D.CircleCast(position, groundCheckerData.checkerRadius, direction, distance,groundLayer);
-        return hit.collider != null;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Vector2 positionGizmo = groundCheckObj.position - new Vector3(0, groundCheckerData.checkerDistance, 0);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(positionGizmo, groundCheckerData.checkerRadius);
-
-    }*/
 }
