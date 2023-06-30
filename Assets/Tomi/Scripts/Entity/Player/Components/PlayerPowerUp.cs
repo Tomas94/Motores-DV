@@ -15,8 +15,7 @@ public class PlayerPowerUp : MonoBehaviour
         Active
     }
 
-    //  public PowerUpList powerUpType;
-    public PowerUpState state = PowerUpState.Locked;
+    public PowerUpState state;
 
     private void Update()
     {
@@ -29,13 +28,14 @@ public class PlayerPowerUp : MonoBehaviour
         switch (state)
         {
             case PowerUpState.Ready:
-                if (Input.GetKeyDown(KeyCode.K))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     powerup.Activate(gameObject);
                     state = PowerUpState.Active;
                     activeTime = powerup.activeTime;
                 }
                 break;
+
             case PowerUpState.Active:
                 canUse = false;
                 if (activeTime > 0)
@@ -44,12 +44,13 @@ public class PlayerPowerUp : MonoBehaviour
                 }
                 else
                 {
+                    powerup.FinishAction(gameObject);
+                    powerup = null;
                     state = PowerUpState.Locked;
                 }
                 break;
+
             case PowerUpState.Locked:
-                powerup.FinishAction(gameObject);
-                powerup = null;
                 if (canUse) state = PowerUpState.Ready;
                 break;
         }
@@ -64,6 +65,10 @@ public class PlayerPowerUp : MonoBehaviour
         if (powerName == "DoubleJump")
         {
             powerup = GetComponent<DoubleJump>();
+        }
+        if (powerName == "WallJump")
+        {
+            powerup = GetComponent<WallJump>();
         }
     }
 

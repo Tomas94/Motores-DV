@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour, IMovable
     //variables para testeo
     public Vector3 rbVelocity;
     public bool isgroundTest;
-
+    public bool isDashing;
+   
     //Referencias
     Rigidbody2D _rb;
 
@@ -24,7 +25,7 @@ public class PlayerMovement : MonoBehaviour, IMovable
     public Vector2 horizontalMove;
     [SerializeField] float _maxAllowedSpeed;
     float _speed;
-    public bool isDashing;
+
 
     public void SetSpeed(float speed)
     {
@@ -58,6 +59,11 @@ public class PlayerMovement : MonoBehaviour, IMovable
 
     public void Jump()
     {
+        AudioManager.Instance.PlaySFX("Jump");
         _rb.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
     }
+
+    public void Jump(int dir) { }
+
+
 }
