@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Tomi/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Agus/Centro.unity
+    guid: 4d4f70f0944f55245b2a54aa7fcddb5b
+  - enabled: 1
+    path: Assets/Agus/Nivel 1 derecha 1.unity
+    guid: c7084d194d8dbb44587f6397abda88f3
+  - enabled: 1
+    path: Assets/Fran/Final.unity
+    guid: 114609c7ebb84434182937b8036547a8
+  - enabled: 0
+    path: Assets/Fran/Menu Inicial.unity
+    guid: ebb55ecf6b1984347921e863028f66cf
   m_configObjects: {}

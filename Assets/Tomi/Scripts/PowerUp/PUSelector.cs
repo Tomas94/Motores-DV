@@ -20,7 +20,7 @@ public class PUSelector : MonoBehaviour
             AudioManager.Instance.PlaySFX("Pick up Power up");
             PlayerPowerUp player = collision.GetComponent<PlayerPowerUp>();
             player.CurrentPowerUp(selectedPU.ToString());
-            if(selectedPU != PowerUpList.WallJump) player.canUse = true;
+            player.canUse = true;
             Destroy(gameObject); 
         }
     }

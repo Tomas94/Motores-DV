@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 
-public class GameOver : MonoBehaviour
+public class SceneController : MonoBehaviour
 {
     [SerializeField] PlayerController player;
     [SerializeField] GameObject menuGO;
@@ -37,5 +37,4 @@ public class GameOver : MonoBehaviour
 
         Application.Quit();
     }
-
 }
