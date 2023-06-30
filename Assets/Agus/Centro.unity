@@ -920,6 +920,10 @@ PrefabInstance:
       propertyPath: yHide
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7123438791945671895, guid: 433762ab18e0df343b6a5cb1e5a6c82a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7826510378061311870, guid: 433762ab18e0df343b6a5cb1e5a6c82a, type: 3}
       propertyPath: m_Name
       value: Spike (1)
@@ -3193,6 +3197,10 @@ PrefabInstance:
     - target: {fileID: 1102938129997984600, guid: 433762ab18e0df343b6a5cb1e5a6c82a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7123438791945671895, guid: 433762ab18e0df343b6a5cb1e5a6c82a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7826510378061311870, guid: 433762ab18e0df343b6a5cb1e5a6c82a, type: 3}
       propertyPath: m_Name
