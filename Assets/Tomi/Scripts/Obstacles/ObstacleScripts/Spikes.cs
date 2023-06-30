@@ -81,6 +81,7 @@ public class Spikes : Obstacles, IDamageable
         playerC.transform.position = playerC.lastCheckPoint;
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         playerC.currentLifes--;
+        AudioManager.Instance.PlaySFX("Die");
         if (playerC.currentLifes <= 0) playerC.Death();
     }
 

@@ -8,7 +8,6 @@ public class PlayerController : Entity
     public Vector2 lastCheckPoint;
     PlayerMovement playerMovement;
     PlayerCollisions playerCollisions;
-    [SerializeField] GameObject gameOverGO;
     [SerializeField] int currentHP;
 
     public event EventHandler Muerte_Player;

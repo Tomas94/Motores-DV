@@ -26,9 +26,9 @@ public class GameOver : MonoBehaviour
         menuGO.SetActive(true);
     }
 
-    public void RestartLevel(string name)
+    public void RestartLevel()
     {
-        SceneManager.LoadScene(name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     public void Salir()

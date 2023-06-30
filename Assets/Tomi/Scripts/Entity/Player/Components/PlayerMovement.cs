@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour, IMovable
 
     public void Jump()
     {
+        AudioManager.Instance.PlaySFX("Jump");
         _rb.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
     }
 
