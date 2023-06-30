@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spikes : Obstacles
+public class Spikes : Obstacles, IDamageable
 {
     [SerializeField] bool isStatic;
     [SerializeField] bool isHidden;
@@ -71,5 +71,24 @@ public class Spikes : Obstacles
             isHidden = false;
         }
 
+    }
+
+    public void TakeDamage(GameObject player)
+    {
+        Debug.Log("se intenta aplicar daño");
+        PlayerController playerC = player.GetComponent<PlayerController>();
+
+        playerC.transform.position = playerC.lastCheckPoint;
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        playerC.currentLifes--;
+        if (playerC.currentLifes <= 0) playerC.Death();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            TakeDamage(collision.gameObject);
+        }
     }
 }
