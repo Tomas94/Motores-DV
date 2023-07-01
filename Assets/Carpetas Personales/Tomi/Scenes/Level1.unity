@@ -315,11 +315,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8610210917254872719, guid: ffe81d2209fd7354088d6f7a5f555759, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.9219038
+      value: -2.47
       objectReference: {fileID: 0}
     - target: {fileID: 8610210917254872719, guid: ffe81d2209fd7354088d6f7a5f555759, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.922606
+      value: -3.35
       objectReference: {fileID: 0}
     - target: {fileID: 8610210917254872719, guid: ffe81d2209fd7354088d6f7a5f555759, type: 3}
       propertyPath: m_LocalPosition.z
@@ -442,6 +442,10 @@ PrefabInstance:
     - target: {fileID: 2134670486656648969, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
       propertyPath: m_Name
       value: PowerUp (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778881957604351757, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4073849616553661577, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
       propertyPath: selectedPU
@@ -1568,6 +1572,10 @@ PrefabInstance:
     - target: {fileID: 2134670486656648969, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
       propertyPath: m_Name
       value: PowerUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778881957604351757, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5683450626443269280, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
       propertyPath: m_RootOrder
