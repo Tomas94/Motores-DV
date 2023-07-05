@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PUSelector : MonoBehaviour
 {
+    public float activTime;
+
     public enum PowerUpList
     {
         Dash,
@@ -17,7 +19,10 @@ public class PUSelector : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            PowerUpEquip(collision.gameObject);
+
             AudioManager.Instance.PlaySFX("Pick up Power up");
+
             PlayerPowerUp player = collision.GetComponent<PlayerPowerUp>();
             player.CurrentPowerUp(selectedPU.ToString());
             player.canUse = true;
@@ -25,5 +30,21 @@ public class PUSelector : MonoBehaviour
         }
     }
 
-
+    void PowerUpEquip(GameObject collision)
+    {
+        switch (selectedPU)
+        {
+            case PowerUpList.Dash:
+                collision.AddComponent(typeof(Dash));
+                collision.GetComponent<Dash>().activeTime = activTime;
+                break;
+            case PowerUpList.DoubleJump:
+                collision.AddComponent(typeof(DoubleJump));
+                collision.GetComponent<DoubleJump>().jumpForce = collision.GetComponent<PlayerController>()._jumpForce;
+                break;
+            case PowerUpList.WallJump:
+                collision.AddComponent(typeof(WallJump));
+                break;
+        }
+    }
 }

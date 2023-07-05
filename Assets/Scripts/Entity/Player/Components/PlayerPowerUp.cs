@@ -28,16 +28,20 @@ public class PlayerPowerUp : MonoBehaviour
         switch (state)
         {
             case PowerUpState.Ready:
+                
+                activeTime = powerup.activeTime;
+
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     powerup.Activate(gameObject);
-                    state = PowerUpState.Active;
-                    activeTime = powerup.activeTime;
+                    state = PowerUpState.Active;             
                 }
                 break;
 
             case PowerUpState.Active:
+                
                 canUse = false;
+                
                 if (activeTime > 0)
                 {
                     activeTime -= Time.deltaTime;
@@ -51,6 +55,7 @@ public class PlayerPowerUp : MonoBehaviour
                 break;
 
             case PowerUpState.Locked:
+                
                 if (canUse) state = PowerUpState.Ready;
                 break;
         }

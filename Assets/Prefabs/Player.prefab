@@ -16,8 +16,6 @@ GameObject:
   - component: {fileID: 9135546004816570956}
   - component: {fileID: 1294737782583125107}
   - component: {fileID: 3040869802867316433}
-  - component: {fileID: 6232562569575878815}
-  - component: {fileID: 2288777517523348209}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -39,7 +37,7 @@ Transform:
   m_Children:
   - {fileID: 847135116070211634}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6867788416108492150
 SpriteRenderer:
@@ -167,10 +165,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 380425302b4c1904fba0c16dbf56eca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLifes: 3
-  speed: 25
   lastCheckPoint: {x: 0, y: 0}
-  currentHP: 0
+  _maxHP: 0
+  _currentHP: 0
+  _speed: 0
+  _jumpForce: 0
+  _isGrounded: 0
 --- !u!114 &9135546004816570956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,13 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8aee1785f570764684fed2c20526bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rbVelocity: {x: 0, y: 0, z: 0}
-  isgroundTest: 0
   isDashing: 0
-  _jumpForce: 7
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
+  velocidad: {x: 0, y: 0}
   horizontalMove: {x: 0, y: 0}
   _maxAllowedSpeed: 5
 --- !u!114 &1294737782583125107
@@ -204,7 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16344897e55a8d0428a7d714e321f3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 0
+  groundCheck: {fileID: 0}
+  _isGrounded: 0
 --- !u!114 &3040869802867316433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,34 +217,6 @@ MonoBehaviour:
   canUse: 0
   activeTime: 0
   state: 1
---- !u!114 &6232562569575878815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3263378526638736744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac71c6c2be7e8dc45bd29a54440e3f8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activeTime: 0.1
-  dashVel: 20
---- !u!114 &2288777517523348209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3263378526638736744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2df7415044f079e42a85b8d2f385656b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activeTime: 0.1
-  jumpForce: 7
 --- !u!1 &6508919679130224128
 GameObject:
   m_ObjectHideFlags: 0

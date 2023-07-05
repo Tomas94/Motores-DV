@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoubleJump : PowerUp
 {
-    public int jumpForce;
+    public float jumpForce;
 
     public override void Activate(GameObject player)
     {

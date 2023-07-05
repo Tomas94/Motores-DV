@@ -6,7 +6,7 @@ using System;
 public class PlayerController : Entity
 {
     public Vector2 lastCheckPoint;
-    
+
     //Referencias
     PlayerMovement playerMovement;
     PlayerCollisions playerCollisions;
@@ -17,7 +17,7 @@ public class PlayerController : Entity
 
     [Header("Variables de Movimiento")]
     [SerializeField] float _speed;
-    [SerializeField] float _jumpForce;
+    public float _jumpForce;
 
     [Header("Booleanos")]
     [SerializeField] bool _isGrounded;
@@ -25,7 +25,7 @@ public class PlayerController : Entity
 
 
     public event EventHandler Muerte_Player;
-    
+
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -34,7 +34,7 @@ public class PlayerController : Entity
 
     void Start()
     {
-        lastCheckPoint = transform.position;  
+        lastCheckPoint = transform.position;
         MaxLifes = _maxHP;
         currentLifes = MaxLifes;
     }
@@ -52,7 +52,7 @@ public class PlayerController : Entity
             if (playerMovement.horizontalMove != Vector2.zero) playerMovement.StartMovement();
             else playerMovement?.StopMovement();
 
-            if (Input.GetKeyDown(KeyCode.W) && _isGrounded) playerMovement.Jump(_jumpForce);           
+            if (Input.GetKeyDown(KeyCode.W) && _isGrounded) playerMovement.Jump(_jumpForce);
         }
     }
 

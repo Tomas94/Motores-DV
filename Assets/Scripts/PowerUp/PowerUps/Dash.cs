@@ -4,19 +4,39 @@ using UnityEngine;
 
 public class Dash : PowerUp
 {
-    public float dashVel;
+    float dashVel;
 
     public override void Activate(GameObject player)
     {
-        PlayerMovement pMovement = player.GetComponent<PlayerMovement>();
-        pMovement.isDashing = true;
-        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-        rb.velocity = pMovement.horizontalMove * dashVel;
+        Dashing(player, true);
     }
 
     public override void FinishAction(GameObject player)
     {
-        PlayerMovement pMovement = player.GetComponent<PlayerMovement>();
-        pMovement.isDashing = false;
+        Dashing(player, false);
+        DestroyImmediate(this);
     }
+
+    public void Dashing(GameObject player, bool isActivating)
+    {
+        PlayerMovement pMovement = player.GetComponent<PlayerMovement>();
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+
+        if (isActivating)
+        {
+            pMovement.isDashing = true;
+            dashVel = pMovement.GetSpeed() * 1.5f;
+            rb.gravityScale = 0;
+            rb.velocity = pMovement.horizontalMove * dashVel;
+        }
+        else
+        {
+            pMovement.isDashing = false;
+            rb.gravityScale = 1;
+            rb.velocity = Vector2.zero;
+        }
+    }
+
+
+
 }
