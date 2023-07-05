@@ -65,16 +65,4 @@ public class Laser : Obstacles, IDamageable
         yield return new WaitForSeconds(coolDown);
         _coroutinePlaying = false;
     }
-
-    public void TakeDamage(GameObject player)
-    {
-        Debug.Log("se intenta aplicar daño");
-        PlayerController playerC = player.GetComponent<PlayerController>();
-
-        playerC.transform.position = playerC.lastCheckPoint;
-        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        playerC.currentLifes--;
-        AudioManager.Instance.PlaySFX("Die");
-        if (playerC.currentLifes <= 0) playerC.Death();
-    }
 }

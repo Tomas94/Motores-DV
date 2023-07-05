@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    //Variables Vida
-    public int currentLifes {get;set;}
-    [SerializeField] private int _maxLifes;
+    
     private bool _isMaxLifesSet = false;
-    [SerializeField] protected float speed;
+    protected float speed;
 
-    //Variables Daño
-
+    //Variables Vida
+    public int currentLifes { get; set; }
+    private int _maxLifes;
+    
     public int MaxLifes
     {
         get { return _maxLifes; }
@@ -25,6 +25,4 @@ public class Entity : MonoBehaviour
             }
         }
     }
-
-
 }

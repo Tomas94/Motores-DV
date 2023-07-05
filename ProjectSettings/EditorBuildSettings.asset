@@ -5,16 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Pruebas_Personales/TomiScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Pantallas/Menu Inicial.unity
+    guid: ebb55ecf6b1984347921e863028f66cf
   - enabled: 1
     path: Assets/Scenes/Niveles/Centro.unity
     guid: 4d4f70f0944f55245b2a54aa7fcddb5b
   - enabled: 1
-    path: Assets/Scenes/Pantallas/Final.unity
-    guid: 114609c7ebb84434182937b8036547a8
-  - enabled: 0
-    path: Assets/Scenes/Pantallas/Menu Inicial.unity
-    guid: ebb55ecf6b1984347921e863028f66cf
+    path: Assets/Scenes/Niveles/Nivel 1/Nivel 1_Panel 1.unity
+    guid: bc5cbb5ac15830e4abadbbd970f080c5
   m_configObjects: {}

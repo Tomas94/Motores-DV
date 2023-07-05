@@ -27,7 +27,7 @@ public class WallJump : PowerUp
     public override void Activate(GameObject player)
     {
         PlayerMovement pMovement = player.GetComponent<PlayerMovement>();
-        pMovement.Jump();
+        //pMovement.Jump();
     }
 
   public void IsOnWall()
@@ -35,14 +35,14 @@ public class WallJump : PowerUp
         isTouchingRightWall = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, wallLayer);
         isTouchingLeftWall = Physics2D.Raycast(wallCheck.position, -transform.right, wallCheckDistance, wallLayer);
 
-        if ((isTouchingRightWall || isTouchingLeftWall) && !GetComponent<PlayerCollisions>().isGrounded)
+       /* if ((isTouchingRightWall || isTouchingLeftWall) && !GetComponent<PlayerCollisions>().isGrounded)
         {
             player.canUse = true;
         }
         else
         {
             player.canUse = false;
-        }
+        }*/
     }
   
 }

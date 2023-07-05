@@ -11,10 +11,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - wall
+  - BackGround
+  - MidGround
   - Player
-  - 
-  - 
+  - ForeGround
   - 
   - 
   - 

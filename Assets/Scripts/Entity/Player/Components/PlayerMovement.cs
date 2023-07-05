@@ -6,26 +6,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour, IMovable
 {
-    //variables para testeo
-    public Vector3 rbVelocity;
-    public bool isgroundTest;
     public bool isDashing;
-   
+    
     //Referencias
     Rigidbody2D _rb;
-
-    //Variables para Salto
-    [SerializeField] int _jumpForce;
-
-    //Variables para GroundCheck
-    public LayerMask groundLayer;
- 
 
     //Variables de Movimiento y Velocidad
     public Vector2 horizontalMove;
     [SerializeField] float _maxAllowedSpeed;
+    
     float _speed;
-
 
     public void SetSpeed(float speed)
     {
@@ -41,7 +31,6 @@ public class PlayerMovement : MonoBehaviour, IMovable
     private void Update()
     {
         horizontalMove = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
-        rbVelocity = _rb.velocity;
     }
 
     public void StartMovement()
@@ -57,13 +46,9 @@ public class PlayerMovement : MonoBehaviour, IMovable
         _rb.velocity = new Vector2(0, _rb.velocity.y);
     }
 
-    public void Jump()
+    public void Jump(float jumpForce)
     {
         AudioManager.Instance.PlaySFX("Jump");
-        _rb.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
+        _rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
     }
-
-    public void Jump(int dir) { }
-
-
 }

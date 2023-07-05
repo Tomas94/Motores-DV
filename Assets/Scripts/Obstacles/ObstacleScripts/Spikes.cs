@@ -15,7 +15,7 @@ public class Spikes : Obstacles, IDamageable
     float movTime = 0.5f;
     
 
-    //direccion del hide para x: 1 Izquierda -1 Derecha para y: 1 Abajo -1 arriba
+    //direccion del hide para x: -1 Izquierda, 1 Derecha, para y: -1 Abajo, 1 arriba
     [SerializeField] int xHide;
     [SerializeField] int yHide;
 
@@ -23,7 +23,7 @@ public class Spikes : Obstacles, IDamageable
     {
         coolDown = 1;
         startPos = transform.position;
-        hidePos = startPos - new Vector3(xHide, yHide);
+        hidePos = startPos + new Vector3(xHide, yHide);
     }
 
     void Update()
@@ -71,18 +71,6 @@ public class Spikes : Obstacles, IDamageable
             isHidden = false;
         }
 
-    }
-
-    public void TakeDamage(GameObject player)
-    {
-        Debug.Log("se intenta aplicar daño");
-        PlayerController playerC = player.GetComponent<PlayerController>();
-
-        playerC.transform.position = playerC.lastCheckPoint;
-        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        playerC.currentLifes--;
-        AudioManager.Instance.PlaySFX("Die");
-        if (playerC.currentLifes <= 0) playerC.Death();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NextLevel : MonoBehaviour
+public class ChangeScene : MonoBehaviour
 {
     public string nextLevel;
 
@@ -26,5 +26,4 @@ public class NextLevel : MonoBehaviour
 
         Application.Quit();
     }
-
 }

@@ -6,9 +6,23 @@ using System;
 public class PlayerController : Entity
 {
     public Vector2 lastCheckPoint;
+    
+    //Referencias
     PlayerMovement playerMovement;
     PlayerCollisions playerCollisions;
-    [SerializeField] int currentHP;
+
+    [Header("Variables Vida")]
+    [SerializeField] int _maxHP;
+    [SerializeField] int _currentHP;
+
+    [Header("Variables de Movimiento")]
+    [SerializeField] float _speed;
+    [SerializeField] float _jumpForce;
+
+    [Header("Booleanos")]
+    [SerializeField] bool _isGrounded;
+
+
 
     public event EventHandler Muerte_Player;
     
@@ -16,25 +30,18 @@ public class PlayerController : Entity
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerCollisions = GetComponent<PlayerCollisions>();
-
-        if (speed != 0) return;
-        else
-        {
-            Debug.Log("No se seteo velocidad, velocidad por defecto puesta en 10");
-            speed = 10;
-        }
     }
 
     void Start()
     {
-        lastCheckPoint = transform.position;
-        playerMovement?.SetSpeed(speed);
+        lastCheckPoint = transform.position;  
+        MaxLifes = _maxHP;
         currentLifes = MaxLifes;
     }
 
     private void Update()
     {
-        currentHP = currentLifes;
+        UpdateVariables();
         MovementController();
     }
 
@@ -45,16 +52,19 @@ public class PlayerController : Entity
             if (playerMovement.horizontalMove != Vector2.zero) playerMovement.StartMovement();
             else playerMovement?.StopMovement();
 
-            if (Input.GetKeyDown(KeyCode.W) && playerCollisions.isGrounded)
-            {
-                playerCollisions.isGrounded = false;
-                playerMovement.Jump();
-            }
+            if (Input.GetKeyDown(KeyCode.W) && _isGrounded) playerMovement.Jump(_jumpForce);           
         }
     }
 
     public void Death()
     {
         Muerte_Player?.Invoke(this, EventArgs.Empty);
+    }
+
+    void UpdateVariables()
+    {
+        _isGrounded = playerCollisions._isGrounded;
+        _currentHP = currentLifes;
+        playerMovement?.SetSpeed(_speed);
     }
 }
