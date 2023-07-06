@@ -80,7 +80,7 @@ public class PlayerController : Entity
 
     void Hooked()
     {
-        //if (_isHooked) 
+        if (_isHooked) playerMovement._rb.velocity = Vector2.zero; 
 
     }
 }

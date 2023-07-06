@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour, IMovable
     public float velocidadActual;
 
     //Referencias
-    Rigidbody2D _rb;
+    public Rigidbody2D _rb;
 
     //Variables de Movimiento y Velocidad
     public Vector2 horizontalMove;
