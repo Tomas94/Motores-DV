@@ -28,6 +28,12 @@ public class PlayerPowerUp : MonoBehaviour
         switch (state)
         {
             case PowerUpState.Ready:
+
+                if (!canUse)
+                {
+                    state = PowerUpState.Locked;
+                    break;
+                }
                 
                 activeTime = powerup.activeTime;
 

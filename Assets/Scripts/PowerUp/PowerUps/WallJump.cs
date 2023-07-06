@@ -1,48 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WallJump : PowerUp
 {
-    PlayerPowerUp player;
-    Rigidbody2D rb;
+    PlayerPowerUp playerPU;
+    PlayerCollisions playerCol;
 
-    public float jumpForce = 5f;            // Fuerza del salto
-    public float wallCheckDistance = 1f;    // Distancia para verificar la pared
-    public Transform wallCheck;             // Punto de verificación de la pared
-    public LayerMask wallLayer;             // Capa de la pared
+    public float pushForce;
+    public float jumpForce;
 
-    private bool isTouchingRightWall;            // Indica si está tocando una pared
-    private bool isTouchingLeftWall;
-
-    private void Awake()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        player = GetComponent<PlayerPowerUp>();
+        playerCol = GetComponent<PlayerCollisions>();
+        playerPU = GetComponent<PlayerPowerUp>();
+        pushForce = 10;
     }
 
     private void Update()
     {
-        IsOnWall();
+        if (playerCol._isOnWall && !playerCol._isGrounded) playerPU.canUse = true;
+        else playerPU.canUse = false;
     }
 
     public override void Activate(GameObject player)
     {
-        PlayerMovement pMovement = player.GetComponent<PlayerMovement>();
-        //pMovement.Jump();
+        StartCoroutine(WallJumping(player));
+       
+        //DestroyImmediate(this);
     }
 
-  public void IsOnWall()
+    IEnumerator WallJumping(GameObject player)
     {
-        isTouchingRightWall = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, wallLayer);
-        isTouchingLeftWall = Physics2D.Raycast(wallCheck.position, -transform.right, wallCheckDistance, wallLayer);
-
-       /* if ((isTouchingRightWall || isTouchingLeftWall) && !GetComponent<PlayerCollisions>().isGrounded)
-        {
-            player.canUse = true;
-        }
-        else
-        {
-            player.canUse = false;
-        }*/
+        Rigidbody2D _rb = player.GetComponent<Rigidbody2D>();
+        _rb.velocity = new Vector2(-transform.localScale.x * pushForce, jumpForce);
+        PlayerMovement playerMv = GetComponent<PlayerMovement>();
+        playerMv.isWallJumping = true;
+        yield return new WaitForSeconds(activeTime);
+        playerMv.isWallJumping = false;
+        _rb.velocity = new Vector2(_rb.velocity.x, 0);
+    
     }
-  
 }

@@ -21,6 +21,7 @@ public class PlayerController : Entity
 
     [Header("Booleanos")]
     [SerializeField] bool _isGrounded;
+    [SerializeField] bool _onWall;
 
 
 
@@ -50,7 +51,7 @@ public class PlayerController : Entity
         if (playerMovement != null)
         {
             if (playerMovement.horizontalMove != Vector2.zero) playerMovement.StartMovement();
-            else playerMovement?.StopMovement();
+            else if(!playerMovement.isWallJumping) playerMovement?.StopMovement();
 
             if (Input.GetKeyDown(KeyCode.W) && _isGrounded) playerMovement.Jump(_jumpForce);
         }
@@ -64,6 +65,7 @@ public class PlayerController : Entity
     void UpdateVariables()
     {
         _isGrounded = playerCollisions._isGrounded;
+        _onWall = playerCollisions._isOnWall;
         _currentHP = currentLifes;
         playerMovement?.SetSpeed(_speed);
     }

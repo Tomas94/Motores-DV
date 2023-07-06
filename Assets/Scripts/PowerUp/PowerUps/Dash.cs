@@ -6,6 +6,14 @@ public class Dash : PowerUp
 {
     float dashVel;
 
+    PlayerPowerUp playerPU;
+
+    private void Start()
+    {
+        playerPU = GetComponent<PlayerPowerUp>();
+        playerPU.canUse = true;
+    }
+
     public override void Activate(GameObject player)
     {
         Dashing(player, true);

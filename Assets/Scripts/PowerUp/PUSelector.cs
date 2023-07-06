@@ -19,13 +19,12 @@ public class PUSelector : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PowerUpEquip(collision.gameObject);
-
             AudioManager.Instance.PlaySFX("Pick up Power up");
-
+            
+            PowerUpEquip(collision.gameObject);
+            
             PlayerPowerUp player = collision.GetComponent<PlayerPowerUp>();
             player.CurrentPowerUp(selectedPU.ToString());
-            player.canUse = true;
             Destroy(gameObject); 
         }
     }
@@ -44,6 +43,8 @@ public class PUSelector : MonoBehaviour
                 break;
             case PowerUpList.WallJump:
                 collision.AddComponent(typeof(WallJump));
+                collision.GetComponent<WallJump>().jumpForce = collision.GetComponent<PlayerController>()._jumpForce*2;
+                collision.GetComponent<WallJump>().activeTime = activTime;
                 break;
         }
     }

@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour, IMovable
 {
     public bool isDashing;
+    public bool isWallJumping;
     public float velocidadActual;
 
     //Referencias
@@ -33,7 +34,7 @@ public class PlayerMovement : MonoBehaviour, IMovable
     {
         _rb = GetComponent<Rigidbody2D>();
         isDashing = false;
-
+        isWallJumping = false;
     }
     private void Update()
     {

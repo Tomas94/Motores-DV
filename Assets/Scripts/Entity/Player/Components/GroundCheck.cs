@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
-    bool isGrounded;
+    [SerializeField] bool isGrounded;
 
     public bool IsGroundedGetter
     {
