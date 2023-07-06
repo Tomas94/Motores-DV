@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-
+    
     #region
     public void toggleMusic()
     {

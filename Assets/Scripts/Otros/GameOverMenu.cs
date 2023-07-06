@@ -24,4 +24,11 @@ public class GameOverMenu : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void Salir()
+    {
+        Debug.Log("Salir...");
+
+        Application.Quit();
+    }
 }

@@ -22,6 +22,13 @@ public class PlayerController : Entity
     [Header("Booleanos")]
     [SerializeField] bool _isGrounded;
     [SerializeField] bool _onWall;
+    [SerializeField] bool _isHooked;
+
+    public bool IsHooked
+    {
+        get { return _isHooked; }
+        set { _isHooked = value; }
+    }
 
 
 
@@ -44,6 +51,7 @@ public class PlayerController : Entity
     {
         UpdateVariables();
         MovementController();
+        Hooked();
     }
 
     void MovementController()
@@ -68,5 +76,11 @@ public class PlayerController : Entity
         _onWall = playerCollisions._isOnWall;
         _currentHP = currentLifes;
         playerMovement?.SetSpeed(_speed);
+    }
+
+    void Hooked()
+    {
+        //if (_isHooked) 
+
     }
 }

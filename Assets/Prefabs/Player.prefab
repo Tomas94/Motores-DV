@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9135546004816570956}
   - component: {fileID: 1294737782583125107}
   - component: {fileID: 3040869802867316433}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -167,10 +167,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastCheckPoint: {x: 0, y: 0}
-  _maxHP: 0
+  _maxHP: 3
   _currentHP: 0
-  _speed: 0
-  _jumpForce: 0
+  _speed: 10
+  _jumpForce: 5
   _isGrounded: 0
   _onWall: 0
 --- !u!114 &9135546004816570956
@@ -186,10 +186,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDashing: 0
+  isWallJumping: 0
   velocidadActual: 0
   horizontalMove: {x: 0, y: 0}
   _maxAllowedSpeed: 5
-  _maxDashAllowedSpeed: 0
+  _maxDashAllowedSpeed: 10
 --- !u!114 &1294737782583125107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,8 +203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16344897e55a8d0428a7d714e321f3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheck: {fileID: 0}
-  wallCheck: {fileID: 0}
+  groundCheck: {fileID: 8588225259491614826}
+  wallCheck: {fileID: 2294820369450394500}
   _isGrounded: 0
   _isOnWall: 0
 --- !u!114 &3040869802867316433
@@ -281,7 +282,8 @@ GameObject:
   m_Component:
   - component: {fileID: 847135116070211634}
   - component: {fileID: 5580624569277035606}
-  m_Layer: 0
+  - component: {fileID: 8588225259491614826}
+  m_Layer: 8
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +298,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6508919679130224128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.074, y: -0.244, z: 0}
+  m_LocalPosition: {x: 0, y: -0.188, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -335,7 +337,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.060358107, y: 0.07510364}
+  m_Offset: {x: 0.014673948, y: -0.0017225742}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -346,5 +348,18 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.101120114, y: 0.05171323}
+  m_Size: {x: 0.08106375, y: 0.0134625435}
   m_EdgeRadius: 0
+--- !u!114 &8588225259491614826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6508919679130224128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76fbbe07e34a164194b2b055a77c595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrounded: 0
