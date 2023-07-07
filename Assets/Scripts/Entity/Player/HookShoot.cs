@@ -35,17 +35,16 @@ public class HookShoot : MonoBehaviour
     {
         _pCtrl.IsHooked = true;
         isMoving = true;
-        // Aquí puedes agregar cualquier otro código necesario al iniciar el movimiento, como inhabilitar otros controles del personaje.
     }
 
     private void Move()
     {
         _rb.gravityScale = 0;
-        // Calcula la dirección hacia el punto
+        
         Vector3 direction = (target.position - transform.position).normalized;
-        // Calcula el desplazamiento por cuadro basado en la velocidad y el tiempo transcurrido desde el último cuadro
+        
         float displacement = speed * Time.deltaTime;
-        // Mueve al personaje hacia el punto objetivo utilizando un Raycast para evitar obstáculos
+        
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, displacement, layers);
         
         if (hit.collider != null)
@@ -55,7 +54,7 @@ public class HookShoot : MonoBehaviour
         }
         transform.position += direction * displacement;
 
-        // Comprueba si el personaje ha llegado al punto objetivo
+        // Comprueba si el player llego al punto objetivo
         if (Vector3.Distance(transform.position, target.position) < displacement)
         {
             StopMoving();
@@ -67,7 +66,6 @@ public class HookShoot : MonoBehaviour
         _pCtrl.IsHooked = false;
         isMoving = false;
         _rb.gravityScale = 1;
-        // Aquí puedes agregar cualquier otro código necesario al detener el movimiento, como habilitar nuevamente los controles del personaje.
     }
 
     private void OnTriggerStay2D(Collider2D collision)

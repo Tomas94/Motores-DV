@@ -7,6 +7,7 @@ public class PlayerPowerUp : MonoBehaviour
     public PowerUp powerup;
     public bool canUse;
     public float activeTime;
+    public string waitingPU;
 
     public enum PowerUpState
     {
@@ -20,6 +21,7 @@ public class PlayerPowerUp : MonoBehaviour
     private void Update()
     {
         PowerUpStateSwitch();
+        WaitingPU();
     }
 
     void PowerUpStateSwitch()
@@ -34,20 +36,21 @@ public class PlayerPowerUp : MonoBehaviour
                     state = PowerUpState.Locked;
                     break;
                 }
-                
+
                 activeTime = powerup.activeTime;
 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     powerup.Activate(gameObject);
-                    state = PowerUpState.Active;             
+                    
+                    state = PowerUpState.Active;
                 }
                 break;
 
             case PowerUpState.Active:
-                
+
                 canUse = false;
-                
+
                 if (activeTime > 0)
                 {
                     activeTime -= Time.deltaTime;
@@ -61,7 +64,6 @@ public class PlayerPowerUp : MonoBehaviour
                 break;
 
             case PowerUpState.Locked:
-                
                 if (canUse) state = PowerUpState.Ready;
                 break;
         }
@@ -69,6 +71,12 @@ public class PlayerPowerUp : MonoBehaviour
 
     public void CurrentPowerUp(string powerName)
     {
+        if (powerup != null && state == PowerUpState.Active)
+        {
+            waitingPU = powerName;
+            return;
+        }
+
         if (powerName == "Dash")
         {
             powerup = GetComponent<Dash>();
@@ -83,5 +91,32 @@ public class PlayerPowerUp : MonoBehaviour
         }
     }
 
+    void WaitingPU()
+    {
+        if (powerup == null)
+        {
+            if (waitingPU == "Dash")
+            {
+                powerup = GetComponent<Dash>();
+            }
+            if (waitingPU == "DoubleJump")
+            {
+                powerup = GetComponent<DoubleJump>();
+            }
+            if (waitingPU == "WallJump")
+            {
+                powerup = GetComponent<WallJump>();
+            }
+            waitingPU ="";
+        }
+
+        PowerUp[] powers = GetComponents<PowerUp>();
+        foreach (PowerUp power in powers)
+        {
+            if (power == powerup) power.enabled = true;
+            else power.enabled = false;
+        }
+
+    }
 
 }

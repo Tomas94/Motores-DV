@@ -14,6 +14,11 @@ public class Dash : PowerUp
         playerPU.canUse = true;
     }
 
+    private void Update()
+    {
+        playerPU.canUse = true;
+    }
+
     public override void Activate(GameObject player)
     {
         Dashing(player, true);
@@ -33,9 +38,10 @@ public class Dash : PowerUp
         if (isActivating)
         {
             pMovement.isDashing = true;
+            pMovement.horizontalMove = Vector2.zero;
             dashVel = pMovement.GetSpeed() * 1.5f;
             rb.gravityScale = 0;
-            rb.velocity = pMovement.horizontalMove * dashVel;
+            rb.velocity = new Vector2(transform.localScale.x,0) * dashVel;
         }
         else
         {

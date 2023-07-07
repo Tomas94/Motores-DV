@@ -10,7 +10,7 @@ public class Portal : MonoBehaviour
     public bool activated;
     public int buttonsNeeded;
     public int buttonCount;
-
+    public string scene;
 
     void Start()
     {
@@ -27,9 +27,12 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (activated && Input.GetKeyDown(KeyCode.W))
+        if (collision.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Final");
+            if (activated && Input.GetKeyDown(KeyCode.W))
+            {
+                SceneManager.LoadScene(scene);
+            }
         }
     }
 

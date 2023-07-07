@@ -60,8 +60,11 @@ public class PlayerMovement : MonoBehaviour, IMovable
 
     public void StopMovement()
     {
-        Debug.Log("Se detuvo");
-        _rb.velocity = new Vector2(0, _rb.velocity.y);
+        if (!isDashing)
+        {
+            Debug.Log("Se detuvo");
+            _rb.velocity = new Vector2(0, _rb.velocity.y);
+        }
     }
 
     public void Jump(float jumpForce)

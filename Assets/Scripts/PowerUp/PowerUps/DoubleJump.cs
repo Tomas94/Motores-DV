@@ -26,6 +26,12 @@ public class DoubleJump : PowerUp
         Rigidbody2D _rb = player.GetComponent<Rigidbody2D>();
         _rb.velocity = Vector2.zero;
         _rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        
+    }
+
+    public override void FinishAction(GameObject player)
+    {
+        base.FinishAction(player);
         DestroyImmediate(this);
     }
 }

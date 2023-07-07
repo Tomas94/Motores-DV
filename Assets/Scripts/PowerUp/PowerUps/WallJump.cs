@@ -25,9 +25,12 @@ public class WallJump : PowerUp
 
     public override void Activate(GameObject player)
     {
-        StartCoroutine(WallJumping(player));
-       
-        //DestroyImmediate(this);
+        StartCoroutine(WallJumping(player));        
+    }
+
+    public override void FinishAction(GameObject player)
+    {
+        DestroyImmediate(this);
     }
 
     IEnumerator WallJumping(GameObject player)
@@ -39,6 +42,6 @@ public class WallJump : PowerUp
         yield return new WaitForSeconds(activeTime);
         playerMv.isWallJumping = false;
         _rb.velocity = new Vector2(_rb.velocity.x, 0);
-    
+
     }
 }
