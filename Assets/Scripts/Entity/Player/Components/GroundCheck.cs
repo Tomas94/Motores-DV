@@ -12,12 +12,6 @@ public class GroundCheck : MonoBehaviour
         get { return isGrounded; }
     }
 
-    private void Update()
-    {
-        //Physics2D.IgnoreCollision()
-    }
-
-
     bool IsGrounded(GameObject colLayer, bool isOnFloor)
     {
         LayerMask collisionLayer = colLayer.gameObject.layer;

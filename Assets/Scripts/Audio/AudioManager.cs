@@ -63,7 +63,7 @@ public class AudioManager : MonoBehaviour
 
     
     #region
-    public void toggleMusic()
+    public void ToggleMusic()
     {
         musicSource.mute = !musicSource.mute;
     }

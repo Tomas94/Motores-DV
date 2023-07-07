@@ -17,7 +17,7 @@ public class DoubleJump : PowerUp
 
     private void Update()
     {
-        if(playerCol._isGrounded) playerPU.canUse = false;
+        if(playerCol.isGrounded) playerPU.canUse = false;
         else playerPU.canUse = true;
     }
 

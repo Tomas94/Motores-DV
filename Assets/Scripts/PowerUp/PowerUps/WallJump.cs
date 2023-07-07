@@ -19,7 +19,7 @@ public class WallJump : PowerUp
 
     private void Update()
     {
-        if (playerCol._isOnWall && !playerCol._isGrounded) playerPU.canUse = true;
+        if (playerCol.isOnWall && !playerCol.isGrounded) playerPU.canUse = true;
         else playerPU.canUse = false;
     }
 

@@ -72,8 +72,8 @@ public class PlayerController : Entity
 
     void UpdateVariables()
     {
-        _isGrounded = playerCollisions._isGrounded;
-        _onWall = playerCollisions._isOnWall;
+        _isGrounded = playerCollisions.isGrounded;
+        _onWall = playerCollisions.isOnWall;
         _currentHP = currentLifes;
         playerMovement?.SetSpeed(_speed);
     }

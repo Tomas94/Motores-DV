@@ -8,13 +8,13 @@ public class PlayerCollisions : MonoBehaviour
     public GroundCheck groundCheck;
     public WallCheck wallCheck;
 
-    [HideInInspector] public bool _isGrounded;
-    [HideInInspector] public bool _isOnWall;
+    [HideInInspector] public bool isGrounded;
+    [HideInInspector] public bool isOnWall;
 
     private void Update()
     {
-        _isGrounded = groundCheck.IsGroundedGetter;
-        _isOnWall = wallCheck.OnWall;
+        isGrounded = groundCheck.IsGroundedGetter;
+        isOnWall = wallCheck.OnWall;
     }
 
 }

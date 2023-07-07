@@ -641,6 +641,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverScreenCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6034122870691157682, guid: 18805fe883249d740873e8a423a80168, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2027898840}
     - target: {fileID: 9162110202401180758, guid: 18805fe883249d740873e8a423a80168, type: 3}
       propertyPath: m_RootOrder
       value: 1

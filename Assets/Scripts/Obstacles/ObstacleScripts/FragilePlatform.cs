@@ -29,7 +29,6 @@ public class FragilePlatform : Obstacles
         originalRotation = transform.rotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Activate();
@@ -39,13 +38,10 @@ public class FragilePlatform : Obstacles
     {
         if (shakeTimer > 0f)
         {
-            // Generar una traslación aleatoria en el eje X
             float shakeOffsetX = Random.Range(-shakeIntensity, shakeIntensity);
 
-            // Generar una rotación aleatoria en el eje Z
             float shakeAngleZ = Random.Range(-shakeIntensity, shakeIntensity);
 
-            // Aplicar la traslación y rotación a la plataforma
             transform.position = originalPosition + new Vector2(shakeOffsetX, 0f);
             transform.rotation = originalRotation * Quaternion.Euler(0f, 0f, shakeAngleZ);
 

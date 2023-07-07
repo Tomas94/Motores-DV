@@ -1479,6 +1479,7 @@ MonoBehaviour:
   activated: 0
   buttonsNeeded: 3
   buttonCount: 0
+  scene: Final
 --- !u!61 &2120866427
 BoxCollider2D:
   m_ObjectHideFlags: 0
