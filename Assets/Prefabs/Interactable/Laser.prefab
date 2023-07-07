@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &3097563113164968804
 LineRenderer:
@@ -149,11 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48baa157dde0fb94aa061cefa4bdce1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolDown: 1
-  laserLine: {fileID: 0}
+  coolDown: 2
+  laserLine: {fileID: 3097563113164968804}
   _direction: {x: 1, y: 0}
   solids:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 264
   turnON: 1
   _coroutinePlaying: 0
