@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,10 +5,12 @@ public class Portal : MonoBehaviour
 {
     public Sprite portalOpen;
     SpriteRenderer _sRenderer;
-    public bool activated;
+    
+    public string scene;
+
     public int buttonsNeeded;
     public int buttonCount;
-    public string scene;
+    public bool activated;
 
     void Start()
     {
@@ -35,7 +35,6 @@ public class Portal : MonoBehaviour
             }
         }
     }
-
     void ActivatePortal()
     {
         if (buttonCount >= buttonsNeeded)
@@ -44,5 +43,4 @@ public class Portal : MonoBehaviour
             _sRenderer.sprite = portalOpen;
         }
     }
-
 }

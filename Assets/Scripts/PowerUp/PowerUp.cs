@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUp : MonoBehaviour
+public class PowerUp
 {
     public float activeTime;
 
-    public virtual void Activate(GameObject player) { }
+    public virtual void StartAction(PlayerController player) { }
 
-    public virtual void FinishAction(GameObject player) { }
+    public virtual void FinishAction(PlayerController player) { }
+
+    public virtual bool CanUse() { return true; }
 }

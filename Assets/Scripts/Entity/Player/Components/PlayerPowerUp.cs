@@ -4,119 +4,83 @@ using UnityEngine;
 
 public class PlayerPowerUp : MonoBehaviour
 {
-    public PowerUp powerup;
-    public bool canUse;
-    public float activeTime;
-    public string waitingPU;
+    //List<PowerUp> powerUpsList = new List<PowerUp>();
+    PowerUp _currentPowerUp;
+    PowerUp _nextPowerUp;
 
-    public enum PowerUpState
+    public PowerUpState puState;
+
+    public void ObtainPowerUp(PowerUp pickedPU)
     {
-        Locked,
-        Ready,
-        Active
+        /*if (currentPowerUp == null) currentPowerUp = pickedPU;
+        else if (powerUpsList.Count > 0)
+        {
+            currentPowerUp = powerUpsList[0];
+            powerUpsList.RemoveAt(0);
+            powerUpsList.Add(pickedPU);
+        }
+        else powerUpsList.Add(pickedPU);
+        */
+
+        if (_currentPowerUp == null) _currentPowerUp = pickedPU;
+        else if (_nextPowerUp != null)
+        {
+            _currentPowerUp = _nextPowerUp;
+            _nextPowerUp = pickedPU;
+            Debug.Log("el PU actual ahora es: " + _currentPowerUp);
+        }
+        else _nextPowerUp = pickedPU;
+
+        puState = PowerUpState.Ready;
     }
 
-    public PowerUpState state;
-
-    private void Update()
+    public void TryUsePowerUp(PlayerController player)
     {
-        PowerUpStateSwitch();
-        WaitingPU();
-    }
+        if (_currentPowerUp == null) return;
 
-    void PowerUpStateSwitch()
-    {
-        if (!powerup) return;
-        switch (state)
+        switch (puState)
         {
             case PowerUpState.Ready:
-
-                if (!canUse)
-                {
-                    state = PowerUpState.Locked;
-                    break;
-                }
-
-                activeTime = powerup.activeTime;
-
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    powerup.Activate(gameObject);
-                    
-                    state = PowerUpState.Active;
-                }
-                break;
-
-            case PowerUpState.Active:
-
-                canUse = false;
-
-                if (activeTime > 0)
-                {
-                    activeTime -= Time.deltaTime;
-                }
-                else
-                {
-                    powerup.FinishAction(gameObject);
-                    powerup = null;
-                    state = PowerUpState.Locked;
-                }
+                if (_currentPowerUp.CanUse()) UsePowerUp(player);
                 break;
 
             case PowerUpState.Locked:
-                if (canUse) state = PowerUpState.Ready;
+                TryEquipNextPowerUp();
                 break;
         }
     }
 
-    public void CurrentPowerUp(string powerName)
+    void UsePowerUp(PlayerController player)
     {
-        if (powerup != null && state == PowerUpState.Active)
-        {
-            waitingPU = powerName;
-            return;
-        }
-
-        if (powerName == "Dash")
-        {
-            powerup = GetComponent<Dash>();
-        }
-        if (powerName == "DoubleJump")
-        {
-            powerup = GetComponent<DoubleJump>();
-        }
-        if (powerName == "WallJump")
-        {
-            powerup = GetComponent<WallJump>();
-        }
+        puState = PowerUpState.Locked;
+        _currentPowerUp.StartAction(player);
+        StartCoroutine(TimerFinishAction(_currentPowerUp.activeTime, player));
     }
 
-    void WaitingPU()
+    void TryEquipNextPowerUp()
     {
-        if (powerup == null)
-        {
-            if (waitingPU == "Dash")
-            {
-                powerup = GetComponent<Dash>();
-            }
-            if (waitingPU == "DoubleJump")
-            {
-                powerup = GetComponent<DoubleJump>();
-            }
-            if (waitingPU == "WallJump")
-            {
-                powerup = GetComponent<WallJump>();
-            }
-            waitingPU ="";
-        }
+        /*if (powerUpsList.Count == 0) return;
+        currentPowerUp = powerUpsList[0];
+        powerUpsList.RemoveAt(0);*/
 
-        PowerUp[] powers = GetComponents<PowerUp>();
-        foreach (PowerUp power in powers)
-        {
-            if (power == powerup) power.enabled = true;
-            else power.enabled = false;
-        }
+        if (_nextPowerUp == null) return;
+        _currentPowerUp = _nextPowerUp;
+        _nextPowerUp = null;
 
+        puState = PowerUpState.Ready;
     }
 
+    IEnumerator TimerFinishAction(float _activeTime, PlayerController player)
+    {
+        Debug.Log("el tiempo activo es de: " + _activeTime);
+        yield return new WaitForSeconds(_activeTime);
+        _currentPowerUp.FinishAction(player);
+        TryEquipNextPowerUp();
+    }
+}
+
+public enum PowerUpState
+{
+    Ready,
+    Locked
 }

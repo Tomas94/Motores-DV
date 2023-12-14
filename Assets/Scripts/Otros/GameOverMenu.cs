@@ -1,30 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 
 public class GameOverMenu : MonoBehaviour
 {
-    [SerializeField] PlayerController player;
-    [SerializeField] GameObject menuGO;
+    [SerializeField] PlayerController _player;
+    [SerializeField] GameObject _menuGOver;
 
     void Start()
     {
-        player.Muerte_Player += MenuGameOverOn;
+        _player.Muerte_Player += MenuGameOverOn;
     }
 
-    void MenuGameOverOn(object sender, EventArgs e)
+    void MenuGameOverOn()
     {
         Time.timeScale = 0;
-        menuGO.SetActive(true);
+        _menuGOver.SetActive(true);
     }
 
     public void RestartLevel()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
     }
 
     public void Salir()

@@ -1,28 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    
-    private bool _isMaxLifesSet = false;
-    protected float speed;
-
     //Variables Vida
-    public int currentLifes { get; set; }
-    private int _maxLifes;
-    
-    public int MaxLifes
+    [Header("Variables Vida")]
+    [SerializeField] protected int _maxLifes;
+    public int currentLifes;
+
+    [Header("Variables de Movimiento")]
+    [SerializeField] float _speed;
+    [SerializeField] float _jumpForce;
+
+    public float Speed { get { return _speed; } set { _speed = value; } }
+    public float JumpForce { get { return _jumpForce; } set { _jumpForce = value; } }
+
+    public virtual void Death()
     {
-        get { return _maxLifes; }
-        
-        set
-        {
-            if (!_isMaxLifesSet)
-            {
-                _maxLifes = value;
-                _isMaxLifesSet = true;
-            }
-        }
+        Debug.Log("Moriste");
     }
 }

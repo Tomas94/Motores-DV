@@ -1,37 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DoubleJump : PowerUp
 {
-    public float jumpForce;
+    PlayerCollisions _collisions;
 
-    PlayerPowerUp playerPU;
-    PlayerCollisions playerCol;
-
-    private void Start()
+    public DoubleJump(PlayerCollisions _pCols)
     {
-        playerCol = GetComponent<PlayerCollisions>();
-        playerPU = GetComponent<PlayerPowerUp>();     
+        _collisions = _pCols;
     }
 
-    private void Update()
+    public override bool CanUse()
     {
-        if(playerCol.isGrounded) playerPU.canUse = false;
-        else playerPU.canUse = true;
+        return !_collisions.Grounded;
     }
 
-    public override void Activate(GameObject player)
+    public override void StartAction(PlayerController player)
     {
-        Rigidbody2D _rb = player.GetComponent<Rigidbody2D>();
-        _rb.velocity = Vector2.zero;
-        _rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-        
-    }
-
-    public override void FinishAction(GameObject player)
-    {
-        base.FinishAction(player);
-        DestroyImmediate(this);
+        player.pMovement.rb.velocity = Vector2.zero;
+        player.pMovement.rb.AddForce(new Vector2(0f, player.JumpForce), ForceMode2D.Impulse);
     }
 }

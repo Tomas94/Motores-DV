@@ -1,47 +1,33 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WallJump : PowerUp
 {
-    PlayerPowerUp playerPU;
-    PlayerCollisions playerCol;
+    PlayerCollisions _collisions;
+    float _pushForce;
 
-    public float pushForce;
-    public float jumpForce;
-
-    private void Start()
+    public WallJump(PlayerCollisions collisions, float pushForce)
     {
-        playerCol = GetComponent<PlayerCollisions>();
-        playerPU = GetComponent<PlayerPowerUp>();
-        pushForce = 10;
+        _collisions = collisions;
+        _pushForce = pushForce;
     }
 
-    private void Update()
+    public override bool CanUse()
     {
-        if (playerCol.isOnWall && !playerCol.isGrounded) playerPU.canUse = true;
-        else playerPU.canUse = false;
+        return (_collisions.OnWall && !_collisions.Grounded);
     }
 
-    public override void Activate(GameObject player)
+    public override void StartAction(PlayerController player)
     {
-        StartCoroutine(WallJumping(player));        
+        DoWallJump(player);
     }
 
-    public override void FinishAction(GameObject player)
+    void DoWallJump(PlayerController player)
     {
-        DestroyImmediate(this);
-    }
+        player.pMovement.rb.velocity = new Vector2(-player.transform.localScale.x * _pushForce, player.JumpForce);
 
-    IEnumerator WallJumping(GameObject player)
-    {
-        Rigidbody2D _rb = player.GetComponent<Rigidbody2D>();
-        _rb.velocity = new Vector2(-transform.localScale.x * pushForce, jumpForce);
-        PlayerMovement playerMv = GetComponent<PlayerMovement>();
-        playerMv.isWallJumping = true;
-        yield return new WaitForSeconds(activeTime);
-        playerMv.isWallJumping = false;
-        _rb.velocity = new Vector2(_rb.velocity.x, 0);
-
+        float startTime = Time.time;
+        while (Time.time < startTime + activeTime) { }
+        player.pMovement.rb.velocity = new Vector2(player.pMovement.rb.velocity.x, 0);
     }
 }

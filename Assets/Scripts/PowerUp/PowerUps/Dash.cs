@@ -1,56 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Dash : PowerUp
 {
-    float dashVel;
-
-    PlayerPowerUp playerPU;
-
-    private void Start()
+    public Dash(float _activeTime)
     {
-        playerPU = GetComponent<PlayerPowerUp>();
-        playerPU.canUse = true;
+        activeTime = _activeTime;
     }
 
-    private void Update()
+    public override void StartAction(PlayerController playerCtrl) => StartDash(playerCtrl);
+
+    public override void FinishAction(PlayerController playerCtrl)
     {
-        playerPU.canUse = true;
+        StopDash(playerCtrl);
+        base.FinishAction(playerCtrl);
     }
 
-    public override void Activate(GameObject player)
+    public void StartDash(PlayerController playerCtrl)
     {
-        Dashing(player, true);
+        playerCtrl.Dashing = true;
+
+        playerCtrl.pMovement.rb.gravityScale = 0;
+        playerCtrl.pMovement.rb.velocity = new Vector2(playerCtrl.transform.localScale.x, 0) * (playerCtrl.Speed * 3f);
     }
 
-    public override void FinishAction(GameObject player)
+    void StopDash(PlayerController playerCtrl)
     {
-        Dashing(player, false);
-        DestroyImmediate(this);
+        playerCtrl.Dashing = false;
+        playerCtrl.pMovement.rb.gravityScale = 1;
+        playerCtrl.pMovement.rb.velocity = Vector2.zero;
     }
-
-    public void Dashing(GameObject player, bool isActivating)
-    {
-        PlayerMovement pMovement = player.GetComponent<PlayerMovement>();
-        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-
-        if (isActivating)
-        {
-            pMovement.isDashing = true;
-            pMovement.horizontalMove = Vector2.zero;
-            dashVel = pMovement.GetSpeed() * 1.5f;
-            rb.gravityScale = 0;
-            rb.velocity = new Vector2(transform.localScale.x,0) * dashVel;
-        }
-        else
-        {
-            pMovement.isDashing = false;
-            rb.gravityScale = 1;
-            rb.velocity = Vector2.zero;
-        }
-    }
-
-
-
 }

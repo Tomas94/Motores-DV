@@ -1,51 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
-    [SerializeField] bool isGrounded;
-    public LayerMask groundLayer;
+    public event Action UpdateGroundBool;
+    [SerializeField] LayerMask _groundLayer;
 
-    public bool IsGroundedGetter
+    bool _grounded;
+
+    public bool IsGrounded
     {
-        get { return isGrounded; }
-    }
-
-    bool IsGrounded(GameObject colLayer, bool isOnFloor)
-    {
-        LayerMask collisionLayer = colLayer.gameObject.layer;
-
-        if (collisionLayer == LayerMask.NameToLayer("Ground"))
-        {
-            return isOnFloor;    
-        }
-        return false;
+        get { return _grounded; }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        //Checkea si se ta tocando el piso
-        if (groundLayer == (groundLayer | (1 << collision.gameObject.layer)))
-        {
-            isGrounded = IsGrounded(collision.gameObject, true);
-        }
-        
+        if (collision.TryGetComponent(out FragilePlatform _platform)) _platform.Shake(); //Verifica si se esta sobre una plataforma fragil;       
 
-        if (collision.GetComponent<FragilePlatform>())
-        {
-            collision.GetComponent<FragilePlatform>().Shake();
-        }
+        //Checkea si se ta tocando el piso
+        if (_grounded) return;
+
+        _grounded = (_groundLayer == (_groundLayer | (1 << collision.gameObject.layer)));
+        UpdateGroundBool?.Invoke();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //Checkea si se ta dejando de tocar el piso
-        if (groundLayer == (groundLayer | (1 << collision.gameObject.layer)))
-        {
-            isGrounded = IsGrounded(collision.gameObject, false);
-        }
-        
+        _grounded = false;
+        UpdateGroundBool?.Invoke();
     }
-
 }

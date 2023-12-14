@@ -1,26 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class WallCheck : MonoBehaviour
-{ 
-    public LayerMask wallLayer;
-    public float radius;
-    
-    [SerializeField] bool onWall;
-    
+{
+    public event Action UpgradeWallBool;
+    [SerializeField] LayerMask _wallLayer;
+
+    bool _onWall;
+    [SerializeField] float _detectionRadius;
+
     public bool OnWall
     {
-        get { return onWall; }
+        get { return _onWall; }
     }
 
     private void Update()
     {
-        onWall = IsOnWall();
+        if (_onWall == IsOnWall()) return;
+        _onWall = !_onWall;
+        UpgradeWallBool?.Invoke();
     }
 
-    public bool IsOnWall()
+    bool IsOnWall() => Physics2D.OverlapCircle(transform.position, _detectionRadius, _wallLayer);
+
+    private void OnDrawGizmos()
     {
-        return Physics2D.OverlapCircle(transform.position, radius, wallLayer);
+        Gizmos.DrawWireSphere(transform.position, _detectionRadius);
     }
 }

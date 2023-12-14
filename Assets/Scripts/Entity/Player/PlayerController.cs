@@ -1,85 +1,71 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
 public class PlayerController : Entity
 {
-    public Vector2 lastCheckPoint;
+    public event Action Muerte_Player;
+    
+    [HideInInspector] public Vector2 lastCheckPoint;  //------------
 
-    //Referencias
-    PlayerMovement playerMovement;
-    PlayerCollisions playerCollisions;
-
-    [Header("Variables Vida")]
-    [SerializeField] int _maxHP;
-    [SerializeField] int _currentHP;
-
-    [Header("Variables de Movimiento")]
-    [SerializeField] float _speed;
-    public float _jumpForce;
+    //Componentes
+    [HideInInspector] public PlayerMovement pMovement;
+    [HideInInspector] public PlayerCollisions pCollisions;
+    [HideInInspector] public PlayerPowerUp pPowerUp;
 
     [Header("Booleanos")]
-    [SerializeField] bool _isGrounded;
-    [SerializeField] bool _onWall;
-    [SerializeField] bool _isHooked;
+    [SerializeField] bool _dashing = false;
+    [SerializeField] bool _hooked;
 
+    public bool Dashing { get { return _dashing; } set { _dashing = value; } }
     public bool IsHooked
     {
-        get { return _isHooked; }
-        set { _isHooked = value; }
-    }
-
-
-
-    public event EventHandler Muerte_Player;
+        get { return _hooked; }
+        set { _hooked = value; }
+    }      //------------
 
     private void Awake()
     {
-        playerMovement = GetComponent<PlayerMovement>();
-        playerCollisions = GetComponent<PlayerCollisions>();
-    }
+        pMovement = GetComponent<PlayerMovement>();
+        pCollisions = GetComponent<PlayerCollisions>();
+        pPowerUp = GetComponent<PlayerPowerUp>();
 
-    void Start()
-    {
         lastCheckPoint = transform.position;
-        MaxLifes = _maxHP;
-        currentLifes = MaxLifes;
+        currentLifes = _maxLifes;
     }
 
     private void Update()
     {
-        UpdateVariables();
+        if (Input.GetKeyDown(KeyCode.Space) && pPowerUp.puState == PowerUpState.Ready) pPowerUp.TryUsePowerUp(this);
+
         MovementController();
+
         Hooked();
     }
 
     void MovementController()
     {
-        if (playerMovement != null)
+        if (!pMovement) return;
+
+        if (Dashing)
         {
-            if (playerMovement.horizontalMove != Vector2.zero) playerMovement.StartMovement();
-            else if(!playerMovement.isWallJumping) playerMovement?.StopMovement();
-
-            if (Input.GetKeyDown(KeyCode.W) && _isGrounded) playerMovement.Jump(_jumpForce);
+            pMovement.Dash(Speed * 1.5f);
+            while (Dashing) pMovement.horizontalDir = Vector2.zero;     //experimental
+            return;
         }
+
+        if (pMovement.horizontalDir != Vector2.zero) pMovement.Move(Speed);
+        else if (!Dashing) pMovement.StopMove();
+
+        if (Input.GetKeyDown(KeyCode.W) && pCollisions.Grounded) pMovement.Jump(JumpForce);
     }
 
-    public void Death()
+    public override void Death()
     {
-        Muerte_Player?.Invoke(this, EventArgs.Empty);
-    }
-
-    void UpdateVariables()
-    {
-        _isGrounded = playerCollisions.isGrounded;
-        _onWall = playerCollisions.isOnWall;
-        _currentHP = currentLifes;
-        playerMovement?.SetSpeed(_speed);
+        Muerte_Player?.Invoke();
     }
 
     void Hooked()
     {
-        if (_isHooked) playerMovement._rb.velocity = Vector2.zero; 
+        if (_hooked) pMovement.rb.velocity = Vector2.zero;
     }
 }

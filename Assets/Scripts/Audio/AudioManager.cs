@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -11,7 +9,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource, sfxSource;
 
     /*A la hora de instanciar un sonido en algún lado, el codigo a
-     * utilizar es: AudioManager.Instance.PlaySFX("nombre de la cancion como se lee en: Audio_Manager -> Sfx Sounds");*/
+      utilizar es: AudioManager.Instance.PlaySFX("nombre de la cancion como se lee en: Audio_Manager -> Sfx Sounds");*/
 
     private void Awake()
     {

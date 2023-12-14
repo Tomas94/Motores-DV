@@ -4,20 +4,19 @@ using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
 
-public class Laser : Obstacles, IDamageable
+public class Laser : Obstacles
 {
-    [SerializeField] LineRenderer laserLine;
+    [SerializeField] LineRenderer _laserLine;
     [SerializeField] Vector2 _direction;
-    [SerializeField] LayerMask solids;
+    [SerializeField] LayerMask _solids;
 
     //Variables para cambiar estado
-    [SerializeField] bool turnON;
-    public bool _coroutinePlaying;
-
+    [SerializeField] bool _turnON;
+    public bool coroutinePlaying;
 
     void Start()
     {
-        laserLine = GetComponent<LineRenderer>();
+        _laserLine = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -29,40 +28,40 @@ public class Laser : Obstacles, IDamageable
     public override void Activate()
     {
         LaserShoot();
-        if (!_coroutinePlaying) StartCoroutine(StateChange());
+        if (!coroutinePlaying) StartCoroutine(StateChange());
     }
 
     void LaserShoot()
     {
-        if (turnON)
+        if (_turnON)
         {
-            laserLine.enabled = true;
+            _laserLine.enabled = true;
             Vector2 startPos = transform.position;
-            RaycastHit2D _hitInfo = Physics2D.Raycast(transform.position, _direction, Mathf.Infinity, solids);
+            RaycastHit2D _hitInfo = Physics2D.Raycast(transform.position, _direction, Mathf.Infinity, _solids);
 
             if (_hitInfo)
             {
-                laserLine.SetPosition(0, startPos);
-                laserLine.SetPosition(1, _hitInfo.point);
+                _laserLine.SetPosition(0, startPos);
+                _laserLine.SetPosition(1, _hitInfo.point);
                 if (_hitInfo.transform.CompareTag("Player"))
                 {
                     TakeDamage(_hitInfo.transform.gameObject);
                 }
             }
-            else laserLine.enabled = false;
+            else _laserLine.enabled = false;
         }
         else
         {
-            laserLine.enabled = false;
+            _laserLine.enabled = false;
         }
     }
 
     public override IEnumerator StateChange()
     {
-        if (coolDown <= 0) yield break;
-        _coroutinePlaying = true;
-        turnON = !turnON;
-        yield return new WaitForSeconds(coolDown);
-        _coroutinePlaying = false;
+        if (_coolDown <= 0) yield break;
+        coroutinePlaying = true;
+        _turnON = !_turnON;
+        yield return new WaitForSeconds(_coolDown);
+        coroutinePlaying = false;
     }
 }

@@ -207,6 +207,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &140973277 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7093141359915566376, guid: 18805fe883249d740873e8a423a80168, type: 3}
+  m_PrefabInstance: {fileID: 770670198}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &407939025
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215,12 +220,28 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7350861517983676890}
     m_Modifications:
+    - target: {fileID: 2294820369450394500, guid: ffe81d2209fd7354088d6f7a5f555759, type: 3}
+      propertyPath: _detectionRadius
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294820369450394500, guid: ffe81d2209fd7354088d6f7a5f555759, type: 3}
+      propertyPath: _wallLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3263378526638736744, guid: ffe81d2209fd7354088d6f7a5f555759, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4735478389080323632, guid: ffe81d2209fd7354088d6f7a5f555759, type: 3}
+      propertyPath: _maxLifes
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8588225259491614826, guid: ffe81d2209fd7354088d6f7a5f555759, type: 3}
       propertyPath: groundLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8588225259491614826, guid: ffe81d2209fd7354088d6f7a5f555759, type: 3}
+      propertyPath: _groundLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8610210917254872719, guid: ffe81d2209fd7354088d6f7a5f555759, type: 3}
@@ -524,6 +545,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 985820489}
+    - target: {fileID: 6034122870691157682, guid: 18805fe883249d740873e8a423a80168, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 985820489}
+    - target: {fileID: 6034122870691157682, guid: 18805fe883249d740873e8a423a80168, type: 3}
+      propertyPath: _menuGOver
+      value: 
+      objectReference: {fileID: 140973277}
     - target: {fileID: 9162110202401180758, guid: 18805fe883249d740873e8a423a80168, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1476,10 +1505,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalOpen: {fileID: 21300000, guid: 0d85d423dcd5be04797ef193d2a54a74, type: 3}
-  activated: 0
+  scene: Final
   buttonsNeeded: 3
   buttonCount: 0
-  scene: Final
+  activated: 0
 --- !u!61 &2120866427
 BoxCollider2D:
   m_ObjectHideFlags: 0

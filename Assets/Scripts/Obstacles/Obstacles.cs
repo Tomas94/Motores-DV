@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Obstacles : MonoBehaviour
+public abstract class Obstacles : MonoBehaviour, IDamageable
 {
-    [SerializeField] protected float coolDown;
+    [SerializeField] protected float _coolDown;
 
     public virtual void Activate() { }
 
@@ -13,7 +13,7 @@ public abstract class Obstacles : MonoBehaviour
     public void TakeDamage(GameObject player)
     {
         Debug.Log("se intenta aplicar daño");
-        PlayerController playerC = player.GetComponent<PlayerController>();
+        player.TryGetComponent<PlayerController>(out var playerC);
 
         playerC.transform.position = playerC.lastCheckPoint;
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

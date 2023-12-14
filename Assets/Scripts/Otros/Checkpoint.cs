@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
     public PlayerController pController;
-    public  Sprite checkPointEnabled;
-    public  Sprite checkPointDisabled;
+    public Sprite checkPointEnabled;
+    public Sprite checkPointDisabled;
     SpriteRenderer _sRenderer;
     public Transform checkPointPos;
 
