@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class PowerUpObject : MonoBehaviour
 {
-    public PowerUpNames currentPowerUp;
+    public PowerUpNames pickablePowerUp;
     [SerializeField] float _respawnTime = 2f;
 
     void GivePowerUp(PlayerPowerUp playerPU)
     {
-        switch (currentPowerUp)
+        switch (pickablePowerUp)
         {
             case PowerUpNames.Dash:
-                playerPU.ObtainPowerUp(new Dash(.5f));
+                playerPU.ObtainPowerUp(new Dash(.15f));
                 break;
             case PowerUpNames.DoubleJump:
                 playerPU.ObtainPowerUp(new DoubleJump(playerPU.GetComponent<PlayerCollisions>()));

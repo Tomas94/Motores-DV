@@ -24,10 +24,11 @@ public class WallJump : PowerUp
 
     void DoWallJump(PlayerController player)
     {
-        player.pMovement.rb.velocity = new Vector2(-player.transform.localScale.x * _pushForce, player.JumpForce);
+        player.pMovement.rb.velocity = new Vector2(-player.transform.localScale.x * _pushForce, player.playerStats.jumpForce);
+
 
         float startTime = Time.time;
         while (Time.time < startTime + activeTime) { }
-        player.pMovement.rb.velocity = new Vector2(player.pMovement.rb.velocity.x, 0);
+        player.pMovement.rb.velocity = new Vector2(player.pMovement.rb.velocity.x, player.playerStats.jumpForce);
     }
 }

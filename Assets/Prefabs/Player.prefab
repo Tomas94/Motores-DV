@@ -39,7 +39,7 @@ Transform:
   - {fileID: 847135116070211634}
   - {fileID: 5935321559317798858}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6867788416108492150
 SpriteRenderer:
@@ -167,14 +167,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 380425302b4c1904fba0c16dbf56eca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStats:
+    speed: 10
+    jumpForce: 5
+    maxLifes: 3
+  currentLifes: 0
   lastCheckPoint: {x: 0, y: 0}
-  _maxHP: 3
-  _currentHP: 0
-  _speed: 10
-  _jumpForce: 5
-  _isGrounded: 0
-  _onWall: 0
-  _isHooked: 0
+  pMovement: {fileID: 0}
+  pCollisions: {fileID: 0}
+  pPowerUp: {fileID: 0}
+  _dashing: 0
+  _hooked: 0
 --- !u!114 &9135546004816570956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,13 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8aee1785f570764684fed2c20526bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDashing: 0
-  isWallJumping: 0
-  velocidadActual: 0
-  _rb: {fileID: 0}
-  horizontalMove: {x: 0, y: 0}
-  _maxAllowedSpeed: 5
-  _maxDashAllowedSpeed: 10
+  rb: {fileID: 0}
+  horizontalDir: {x: 0, y: 0}
 --- !u!114 &1294737782583125107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,10 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16344897e55a8d0428a7d714e321f3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheck: {fileID: 8588225259491614826}
-  wallCheck: {fileID: 2294820369450394500}
-  _isGrounded: 0
-  _isOnWall: 0
+  _grounded: 0
+  _onWall: 0
 --- !u!114 &3040869802867316433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,11 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652f0ee0fd18ee4478390957a8428b7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerup: {fileID: 0}
-  canUse: 0
-  activeTime: 0
-  waitingPU: 
-  state: 0
+  puState: 0
 --- !u!114 &3226696259566592082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,11 +281,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8992a60d05c01429e783b0e61159b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallLayer:
+  _wallLayer:
     serializedVersion: 2
     m_Bits: 8
-  radius: 0.05
-  onWall: 0
+  _detectionRadius: 0.06
 --- !u!1 &6508919679130224128
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76fbbe07e34a164194b2b055a77c595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 0
-  groundLayer:
+  _groundLayer:
     serializedVersion: 2
     m_Bits: 8

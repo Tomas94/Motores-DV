@@ -756,6 +756,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Double Jump
       objectReference: {fileID: 0}
+    - target: {fileID: 4073849616553661577, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
+      propertyPath: currentPowerUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5683450626443269280, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -903,6 +907,10 @@ PrefabInstance:
     - target: {fileID: 2134670486656648969, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
       propertyPath: m_Name
       value: Double Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073849616553661577, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
+      propertyPath: currentPowerUp
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5683450626443269280, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
       propertyPath: m_RootOrder
@@ -6423,6 +6431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Double Jump
       objectReference: {fileID: 0}
+    - target: {fileID: 4073849616553661577, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
+      propertyPath: currentPowerUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5683450626443269280, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -6603,10 +6615,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -35.743
       objectReference: {fileID: 0}
-    - target: {fileID: 7286043094038628113, guid: 48c7fa8cc70a9284295bf6a6fe322b78, type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6760,6 +6768,10 @@ PrefabInstance:
     - target: {fileID: 2134670486656648969, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
       propertyPath: m_Name
       value: Double Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073849616553661577, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
+      propertyPath: currentPowerUp
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5683450626443269280, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
       propertyPath: m_RootOrder
@@ -6984,6 +6996,10 @@ PrefabInstance:
     - target: {fileID: 2134670486656648969, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
       propertyPath: m_Name
       value: Double Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073849616553661577, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
+      propertyPath: currentPowerUp
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5683450626443269280, guid: 9f87363af9863224795106235fa6dfd3, type: 3}
       propertyPath: m_RootOrder

@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    //Variables Vida
+    public PlayerStats playerStats = new PlayerStats();
+    
     [Header("Variables Vida")]
-    [SerializeField] protected int _maxLifes;
     public int currentLifes;
 
+    /*[SerializeField] protected int _maxLifes;
     [Header("Variables de Movimiento")]
     [SerializeField] float _speed;
     [SerializeField] float _jumpForce;
 
     public float Speed { get { return _speed; } set { _speed = value; } }
-    public float JumpForce { get { return _jumpForce; } set { _jumpForce = value; } }
+    public float JumpForce { get { return _jumpForce; } set { _jumpForce = value; } }*/
 
     public virtual void Death()
     {

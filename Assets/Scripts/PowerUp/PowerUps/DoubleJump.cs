@@ -17,6 +17,6 @@ public class DoubleJump : PowerUp
     public override void StartAction(PlayerController player)
     {
         player.pMovement.rb.velocity = Vector2.zero;
-        player.pMovement.rb.AddForce(new Vector2(0f, player.JumpForce), ForceMode2D.Impulse);
+        player.pMovement.rb.AddForce(new Vector2(0f, player.playerStats.jumpForce), ForceMode2D.Impulse);
     }
 }

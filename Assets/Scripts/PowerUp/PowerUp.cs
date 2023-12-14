@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PowerUp
+public abstract class PowerUp
 {
     public float activeTime;
 

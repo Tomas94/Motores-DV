@@ -1,10 +1,11 @@
 using UnityEngine;
+using System.Collections;
 using System;
 
 public class PlayerController : Entity
 {
     public event Action Muerte_Player;
-    
+
     [HideInInspector] public Vector2 lastCheckPoint;  //------------
 
     //Componentes
@@ -29,8 +30,12 @@ public class PlayerController : Entity
         pCollisions = GetComponent<PlayerCollisions>();
         pPowerUp = GetComponent<PlayerPowerUp>();
 
+        playerStats.speed = 10;
+        playerStats.jumpForce = 5;
+        playerStats.maxLifes = 3;
+
         lastCheckPoint = transform.position;
-        currentLifes = _maxLifes;
+        currentLifes = playerStats.maxLifes;
     }
 
     private void Update()
@@ -44,24 +49,26 @@ public class PlayerController : Entity
 
     void MovementController()
     {
-        if (!pMovement) return;
+        if (!pMovement || Dashing) return;
 
-        if (Dashing)
-        {
-            pMovement.Dash(Speed * 1.5f);
-            while (Dashing) pMovement.horizontalDir = Vector2.zero;     //experimental
-            return;
-        }
+        if (pMovement.horizontalDir != Vector2.zero) pMovement.Move(playerStats.speed);
+        else pMovement.StopMove();
 
-        if (pMovement.horizontalDir != Vector2.zero) pMovement.Move(Speed);
-        else if (!Dashing) pMovement.StopMove();
-
-        if (Input.GetKeyDown(KeyCode.W) && pCollisions.Grounded) pMovement.Jump(JumpForce);
+        if (Input.GetKeyDown(KeyCode.W) && pCollisions.Grounded) pMovement.Jump(playerStats.jumpForce);
     }
 
     public override void Death()
     {
         Muerte_Player?.Invoke();
+    }
+
+    IEnumerator DashCoroutine()
+    {
+        while (Dashing) 
+        {
+            pMovement.horizontalDir = Vector2.zero; 
+            yield return null;
+        }     //experimental
     }
 
     void Hooked()

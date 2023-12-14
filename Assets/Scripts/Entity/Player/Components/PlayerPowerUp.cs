@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerPowerUp : MonoBehaviour
@@ -7,6 +6,9 @@ public class PlayerPowerUp : MonoBehaviour
     //List<PowerUp> powerUpsList = new List<PowerUp>();
     PowerUp _currentPowerUp;
     PowerUp _nextPowerUp;
+
+    [SerializeField] string _currentPU;
+    [SerializeField] string _nextPU;
 
     public PowerUpState puState;
 
@@ -27,10 +29,10 @@ public class PlayerPowerUp : MonoBehaviour
         {
             _currentPowerUp = _nextPowerUp;
             _nextPowerUp = pickedPU;
-            Debug.Log("el PU actual ahora es: " + _currentPowerUp);
         }
         else _nextPowerUp = pickedPU;
 
+        UpdatePowerUpStrings();
         puState = PowerUpState.Ready;
     }
 
@@ -63,10 +65,15 @@ public class PlayerPowerUp : MonoBehaviour
         currentPowerUp = powerUpsList[0];
         powerUpsList.RemoveAt(0);*/
 
-        if (_nextPowerUp == null) return;
+        if (_nextPowerUp == null)
+        {
+            _currentPowerUp = null;
+            _currentPU = null;
+            return;
+        }
         _currentPowerUp = _nextPowerUp;
         _nextPowerUp = null;
-
+        UpdatePowerUpStrings();
         puState = PowerUpState.Ready;
     }
 
@@ -76,6 +83,12 @@ public class PlayerPowerUp : MonoBehaviour
         yield return new WaitForSeconds(_activeTime);
         _currentPowerUp.FinishAction(player);
         TryEquipNextPowerUp();
+    }
+
+    void UpdatePowerUpStrings()
+    {
+        _currentPU = _currentPowerUp?.ToString();
+        _nextPU = _nextPowerUp?.ToString();
     }
 }
 

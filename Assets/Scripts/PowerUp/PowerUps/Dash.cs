@@ -12,7 +12,6 @@ public class Dash : PowerUp
     public override void FinishAction(PlayerController playerCtrl)
     {
         StopDash(playerCtrl);
-        base.FinishAction(playerCtrl);
     }
 
     public void StartDash(PlayerController playerCtrl)
@@ -20,7 +19,7 @@ public class Dash : PowerUp
         playerCtrl.Dashing = true;
 
         playerCtrl.pMovement.rb.gravityScale = 0;
-        playerCtrl.pMovement.rb.velocity = new Vector2(playerCtrl.transform.localScale.x, 0) * (playerCtrl.Speed * 3f);
+        playerCtrl.pMovement.rb.velocity = new Vector2(playerCtrl.transform.localScale.x, 0) * (playerCtrl.playerStats.speed * 1.5f);
     }
 
     void StopDash(PlayerController playerCtrl)
