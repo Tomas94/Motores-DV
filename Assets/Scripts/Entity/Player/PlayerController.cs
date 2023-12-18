@@ -1,8 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class PlayerController : Entity
+public class PlayerController : Entity, IDamageable
 {
     public event Action Muerte_Player;
 
@@ -62,17 +63,17 @@ public class PlayerController : Entity
         Muerte_Player?.Invoke();
     }
 
-    IEnumerator DashCoroutine()
-    {
-        while (Dashing) 
-        {
-            pMovement.horizontalDir = Vector2.zero; 
-            yield return null;
-        }     //experimental
-    }
-
     void Hooked()
     {
         if (_hooked) pMovement.rb.velocity = Vector2.zero;
+    }
+
+    public void TakeDamage()
+    {
+        transform.position = lastCheckPoint;
+        pMovement.rb.velocity = Vector2.zero;
+        currentLifes--;
+        AudioManager.Instance.PlaySFX("Die");
+        if (currentLifes <= 0) Death();
     }
 }

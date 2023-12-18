@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Obstacles : MonoBehaviour, IDamageable
+public abstract class Obstacles : MonoBehaviour
 {
     [SerializeField] protected float _coolDown;
 
@@ -10,7 +10,7 @@ public abstract class Obstacles : MonoBehaviour, IDamageable
 
     public abstract IEnumerator StateChange();
 
-    public void TakeDamage(GameObject player)
+    /*public void TakeDamage(GameObject player)
     {
         Debug.Log("se intenta aplicar daño");
         player.TryGetComponent<PlayerController>(out var playerC);
@@ -20,5 +20,5 @@ public abstract class Obstacles : MonoBehaviour, IDamageable
         playerC.currentLifes--;
         AudioManager.Instance.PlaySFX("Die");
         if (playerC.currentLifes <= 0) playerC.Death();
-    }
+    }*/
 }

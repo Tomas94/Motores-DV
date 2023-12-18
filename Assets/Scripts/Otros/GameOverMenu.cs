@@ -9,7 +9,7 @@ public class GameOverMenu : MonoBehaviour
 
     void Start()
     {
-        _player = FindAnyObjectByType<PlayerController>();
+        _player = FindObjectOfType<PlayerController>();
         _player.Muerte_Player += MenuGameOverOn;
     }
 

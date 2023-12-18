@@ -27,11 +27,6 @@ public class FragilePlatform : Obstacles
         _originalRotation = transform.rotation;
     }
 
-    void Update()
-    {
-        // Activate();
-    }
-
     /*public override void Activate()
     {
         if (_shakeTimer > 0f)
@@ -82,8 +77,7 @@ public class FragilePlatform : Obstacles
 
         yield return new WaitForSeconds(_coolDown);
 
-        transform.position = _originalPosition;
-        transform.rotation = _originalRotation;
+        transform.SetPositionAndRotation(_originalPosition, _originalRotation);
 
         ChangeVisibility();
 

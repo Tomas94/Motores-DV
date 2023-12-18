@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public PlayerStats playerStats = new PlayerStats();
+    public PlayerStats playerStats = new();
     
     [Header("Variables Vida")]
     public int currentLifes;

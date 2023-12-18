@@ -43,9 +43,9 @@ public class Laser : Obstacles
             {
                 _laserLine.SetPosition(0, startPos);
                 _laserLine.SetPosition(1, _hitInfo.point);
-                if (_hitInfo.transform.CompareTag("Player"))
+                if (_hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable _damageable))
                 {
-                    TakeDamage(_hitInfo.transform.gameObject);
+                    _damageable.TakeDamage();
                 }
             }
             else _laserLine.enabled = false;
