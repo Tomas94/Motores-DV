@@ -17,7 +17,7 @@ public class PowerUpObject : MonoBehaviour
                 playerPU.ObtainPowerUp(new DoubleJump(playerPU.GetComponent<PlayerCollisions>()));
                 break;
             case PowerUpNames.WallJump:
-                playerPU.ObtainPowerUp(new WallJump(playerPU.GetComponent<PlayerCollisions>(), 10f));
+                playerPU.ObtainPowerUp(new WallJump(playerPU.GetComponent<PlayerCollisions>(), 5f));
                 break;
         }    
     }
